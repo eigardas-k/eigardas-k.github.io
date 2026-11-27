@@ -250,3 +250,253 @@ footer a:hover {
   text-align: center;
   vertical-align: middle;
 }
+
+
+/* =====================================================
+   10 LD – Kompetencijų pažangos modulis
+   ===================================================== */
+
+/* 3. XP, lygio ir rango sritis */
+.pazanga {
+  background: #ffffff;
+  border: 1px solid #dce6ef;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.info-langeliai {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.info-langelis {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #eef4fa;
+}
+
+.info-langelis:nth-child(2) { background: #f1edfb; }
+.info-langelis:nth-child(3) { background: #e9f6ee; }
+
+.info-langelis i {
+  font-size: 26px;
+  color: #0b5c8a;
+}
+
+.info-langelis span {
+  display: block;
+  font-size: 13px;
+  color: #4a6075;
+}
+
+.info-langelis strong {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 22px;
+  color: #12304d;
+}
+
+/* 4. Progreso juosta */
+.progreso-pavadinimas {
+  margin: 20px 0 6px;
+  font-weight: 600;
+}
+
+.xp-juosta {
+  height: 22px;
+  border-radius: 11px;
+  background: #dce6ef;          /* likusi dalis */
+  overflow: hidden;
+}
+
+.xp-uzpildyta {
+  height: 100%;
+  border-radius: 11px;
+  background: linear-gradient(90deg, #0b5c8a, #2a9fd6);   /* užpildyta dalis */
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 22px;
+}
+
+/* 5. Statistika */
+.statistika {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #dce6ef;
+}
+
+.statistika i {
+  color: #0b5c8a;
+  margin-right: 4px;
+}
+
+/* 2. Įgūdžių lenta */
+.lenta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stulpelis {
+  background: #f7f9fb;
+  border: 1px solid #dce6ef;
+  border-radius: 12px;
+  padding: 0 14px 14px;
+}
+
+.stulpelis h3 {
+  font-size: 18px;
+  margin: 0 -14px 14px;
+  padding: 12px 16px;
+  border-radius: 12px 12px 0 0;
+}
+
+.stulpelis.planuojama h3 { background: #fdf0e2; color: #b85f12; border-bottom: 3px solid #e07a1f; }
+.stulpelis.mokomasi h3   { background: #e3effa; color: #0b5c8a; border-bottom: 3px solid #0b5c8a; }
+.stulpelis.atlikta h3    { background: #e3f4e9; color: #1d7a45; border-bottom: 3px solid #2e9e5b; }
+
+/* Įgūdžio kortelė */
+.kortele {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #dce6ef;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.kortele-ikona {
+  font-size: 22px;
+  color: #0b5c8a;
+}
+
+.kortele-tekstas {
+  flex: 1;
+}
+
+.kortele h4 {
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.busena,
+.xp {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.planuojama .busena { background: #fdf0e2; color: #b85f12; }
+.mokomasi .busena   { background: #e3effa; color: #0b5c8a; }
+.atlikta .busena    { background: #e3f4e9; color: #1d7a45; }
+
+.xp {
+  background: #eef1f4;
+  color: #33414e;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Mažuose ekranuose – vienas stulpelis */
+@media (max-width: 768px) {
+  .info-langeliai,
+  .lenta {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   10 LD papildoma 1 – animuotas gradientinis fonas „Paslaugose“
+   ===================================================== */
+#services {
+  background: linear-gradient(120deg, #e3effa, #fdf0e2, #e3f4e9, #f1edfb);
+  background-size: 300% 300%;
+  animation: gradientas 12s ease infinite;
+}
+
+@keyframes gradientas {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =====================================================
+   10 LD papildoma 2 – animuotos CSS figūros „Apie“ skiltyje
+   ===================================================== */
+#about {
+  position: relative;
+}
+
+#about .container {
+  position: relative;
+  z-index: 1;               /* turinys virš figūrų */
+}
+
+.figura {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* Apskritimas – plūduriavimas (floating) */
+.apskritimas {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #2a9fd6;
+  top: 60px;
+  left: 4%;
+  animation: plaukimas 5s ease-in-out infinite;
+}
+
+/* Trikampis – sukimasis (rotating) */
+.trikampis {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid #e07a1f;
+  bottom: 60px;
+  right: 4%;
+  animation: sukimas 8s linear infinite;
+}
+
+/* Kvadratas – didėjimas (scaling) */
+.kvadratas {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: #2e9e5b;
+  top: 70px;
+  right: 10%;
+  animation: didejimas 3s ease-in-out infinite;
+}
+
+@keyframes plaukimas {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(40px); }
+}
+
+@keyframes sukimas {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes didejimas {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.5); }
+}
