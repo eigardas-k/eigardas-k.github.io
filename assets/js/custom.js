@@ -178,3 +178,174 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+
+/* =====================================================
+   12 LD: kompetencijų pažangos modulis
+   ===================================================== */
+
+// 1a–c. Įgūdžių masyvas (pradinės būsenos)
+const pradiniaiIgudziai = [
+  { pavadinimas: 'FPGA programavimas',   busena: 'Planuojama', xp: 80, ikona: 'bi-motherboard' },
+  { pavadinimas: 'RF grandinės',         busena: 'Planuojama', xp: 60, ikona: 'bi-broadcast' },
+  { pavadinimas: 'STM32 programavimas',  busena: 'Mokomasi',   xp: 50, ikona: 'bi-cpu' },
+  { pavadinimas: 'Signalų apdorojimas',  busena: 'Mokomasi',   xp: 40, ikona: 'bi-soundwave' },
+  { pavadinimas: 'KiCad projektavimas',  busena: 'Atlikta',    xp: 60, ikona: 'bi-diagram-3' },
+  { pavadinimas: 'LTspice modeliavimas', busena: 'Atlikta',    xp: 50, ikona: 'bi-activity' },
+  { pavadinimas: 'Litavimas',            busena: 'Atlikta',    xp: 40, ikona: 'bi-tools' },
+  { pavadinimas: 'MATLAB',               busena: 'Atlikta',    xp: 30, ikona: 'bi-graph-up' }
+];
+
+const busenos = ['Planuojama', 'Mokomasi', 'Atlikta'];
+
+// Lygių ir rangų lentelė
+const lygiai = [
+  { lygis: 1, nuo: 0,   iki: 50,   rangas: 'Pradedantysis' },
+  { lygis: 2, nuo: 50,  iki: 150,  rangas: 'Praktikantas' },
+  { lygis: 3, nuo: 150, iki: 300,  rangas: 'Specialistas' },
+  { lygis: 4, nuo: 300, iki: null, rangas: 'Profesionalas' }
+];
+
+const SAUGYKLOS_RAKTAS = 'igudziuBusenos';
+
+// Darbinis masyvas – pradinių įgūdžių kopija
+let igudziai = pradiniaiIgudziai.map(function (igudis) {
+  return Object.assign({}, igudis);
+});
+
+/* ---------- Papildoma: Local Storage ---------- */
+
+// a. Įgūdžių būsenų išsaugojimas
+function issaugotiBusenas() {
+  const busenuObjektas = {};
+  igudziai.forEach(function (igudis) {
+    busenuObjektas[igudis.pavadinimas] = igudis.busena;
+  });
+  try {
+    localStorage.setItem(SAUGYKLOS_RAKTAS, JSON.stringify(busenuObjektas));
+  } catch (klaida) {
+    console.log('Nepavyko išsaugoti būsenų', klaida);
+  }
+}
+
+// b–c. Būsenų atkūrimas (jei nėra – lieka pradinės būsenos)
+function atkurtiBusenas() {
+  let issaugota = null;
+  try {
+    issaugota = JSON.parse(localStorage.getItem(SAUGYKLOS_RAKTAS));
+  } catch (klaida) {
+    issaugota = null;
+  }
+  if (!issaugota) {
+    return;
+  }
+  igudziai.forEach(function (igudis) {
+    if (busenos.includes(issaugota[igudis.pavadinimas])) {
+      igudis.busena = issaugota[igudis.pavadinimas];
+    }
+  });
+}
+
+/* ---------- 1. Kortelių atvaizdavimas ---------- */
+function atvaizduotiKorteles() {
+  // Išvalomi visi stulpeliai
+  busenos.forEach(function (busena) {
+    document.getElementById('korteles-' + busena.toLowerCase()).innerHTML = '';
+  });
+
+  igudziai.forEach(function (igudis, indeksas) {
+    const kortele = document.createElement('div');
+    kortele.className = 'kortele';
+
+    // Būsenos pasirinkimo sąrašas
+    let pasirinkimai = '';
+    busenos.forEach(function (busena) {
+      const pazymeta = busena === igudis.busena ? ' selected' : '';
+      pasirinkimai += '<option value="' + busena + '"' + pazymeta + '>' + busena + '</option>';
+    });
+
+    kortele.innerHTML =
+      '<i class="bi ' + igudis.ikona + ' kortele-ikona"></i>' +
+      '<div class="kortele-tekstas">' +
+        '<h4>' + igudis.pavadinimas + '</h4>' +
+        '<select class="busena-pasirinkimas" aria-label="Būsena">' + pasirinkimai + '</select>' +
+      '</div>' +
+      '<span class="xp">XP: ' + igudis.xp + '</span>';
+
+    // 2. Pakeitus būseną – kortelė perkeliama ir viskas perskaičiuojama
+    kortele.querySelector('select').addEventListener('change', function (ivykis) {
+      pakeistiBusena(indeksas, ivykis.target.value);
+    });
+
+    document.getElementById('korteles-' + igudis.busena.toLowerCase()).appendChild(kortele);
+  });
+}
+
+/* ---------- 2. Būsenos keitimas ---------- */
+function pakeistiBusena(indeksas, naujaBusena) {
+  igudziai[indeksas].busena = naujaBusena;
+  issaugotiBusenas();
+  atnaujintiModuli();
+}
+
+/* ---------- 3. XP, lygis ir rangas ---------- */
+function skaiciuotiXP() {
+  // Sumuojami tik „Atlikta“ būsenos įgūdžių XP
+  return igudziai
+    .filter(function (igudis) { return igudis.busena === 'Atlikta'; })
+    .reduce(function (suma, igudis) { return suma + igudis.xp; }, 0);
+}
+
+function rastiLygi(xp) {
+  for (let i = lygiai.length - 1; i >= 0; i--) {
+    if (xp >= lygiai[i].nuo) {
+      return lygiai[i];
+    }
+  }
+  return lygiai[0];
+}
+
+/* ---------- 4. Progreso juosta ---------- */
+function atnaujintiProgresa(xp, lygis) {
+  let procentas;
+  if (lygis.iki === null) {
+    procentas = 100;   // 4 lygis – maksimalus progresas
+  } else {
+    procentas = Math.round((xp - lygis.nuo) / (lygis.iki - lygis.nuo) * 100);
+  }
+  const juosta = document.getElementById('xp-progresas');
+  juosta.style.width = procentas + '%';
+  juosta.textContent = procentas + '%';
+}
+
+/* ---------- 5. Statistika ---------- */
+function atnaujintiStatistika() {
+  const viso = igudziai.length;
+  const atlikta = igudziai.filter(function (igudis) {
+    return igudis.busena === 'Atlikta';
+  }).length;
+  const procentas = viso === 0 ? 0 : Math.round(atlikta / viso * 100);
+
+  document.getElementById('igudziu-skaicius').textContent = viso;
+  document.getElementById('atlikta-skaicius').textContent = atlikta;
+  document.getElementById('atlikta-procentas').textContent = procentas + '%';
+}
+
+/* ---------- 7. Viso modulio atnaujinimas ---------- */
+function atnaujintiModuli() {
+  const xp = skaiciuotiXP();
+  const lygis = rastiLygi(xp);
+
+  atvaizduotiKorteles();
+  document.getElementById('bendras-xp').textContent = xp + ' XP';
+  document.getElementById('lygis').textContent = lygis.lygis;
+  document.getElementById('rangas').textContent = lygis.rangas;
+  atnaujintiProgresa(xp, lygis);
+  atnaujintiStatistika();
+}
+
+// Paleidimas įkėlus puslapį
+document.addEventListener('DOMContentLoaded', function () {
+  atkurtiBusenas();
+  atnaujintiModuli();
+});

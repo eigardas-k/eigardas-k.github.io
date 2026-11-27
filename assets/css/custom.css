@@ -583,3 +583,23 @@ footer a:hover {
   font-weight: 700;
   color: #0b5c8a;
 }
+
+
+/* =====================================================
+   12 LD – būsenos pasirinkimas kortelėje
+   ===================================================== */
+.busena-pasirinkimas {
+  font-size: 12px;
+  padding: 2px 6px;
+  border: 1px solid #dce6ef;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.planuojama .busena-pasirinkimas { background: #fdf0e2; color: #b85f12; }
+.mokomasi .busena-pasirinkimas   { background: #e3effa; color: #0b5c8a; }
+.atlikta .busena-pasirinkimas    { background: #e3f4e9; color: #1d7a45; }
+
+.xp-uzpildyta {
+  transition: width 0.4s;
+}

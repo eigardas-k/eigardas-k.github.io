@@ -220,111 +220,46 @@
           <div class="info-langeliai">
             <div class="info-langelis">
               <i class="bi bi-star"></i>
-              <div><span>Bendras XP:</span><strong>180 XP</strong></div>
+              <div><span>Bendras XP:</span><strong id="bendras-xp">0 XP</strong></div>
             </div>
             <div class="info-langelis">
               <i class="bi bi-bar-chart-line"></i>
-              <div><span>Lygis:</span><strong>3</strong></div>
+              <div><span>Lygis:</span><strong id="lygis">1</strong></div>
             </div>
             <div class="info-langelis">
               <i class="bi bi-trophy"></i>
-              <div><span>Rangas:</span><strong>Specialistas</strong></div>
+              <div><span>Rangas:</span><strong id="rangas">Pradedantysis</strong></div>
             </div>
           </div>
 
           <!-- Progreso juosta iki kito lygio -->
           <p class="progreso-pavadinimas">Progresas iki kito lygio</p>
           <div class="xp-juosta">
-            <div class="xp-uzpildyta" style="width: 20%;">20%</div>
+            <div class="xp-uzpildyta" id="xp-progresas" style="width: 0%;">0%</div>
           </div>
 
           <!-- Statistika -->
           <div class="statistika">
-            <div><i class="bi bi-list-check"></i> Įgūdžiai: <strong>8</strong></div>
-            <div><i class="bi bi-check-circle"></i> Atlikta: <strong>4</strong></div>
-            <div><i class="bi bi-pie-chart"></i> Procentas: <strong>50%</strong></div>
+            <div><i class="bi bi-list-check"></i> Įgūdžiai: <strong id="igudziu-skaicius">0</strong></div>
+            <div><i class="bi bi-check-circle"></i> Atlikta: <strong id="atlikta-skaicius">0</strong></div>
+            <div><i class="bi bi-pie-chart"></i> Procentas: <strong id="atlikta-procentas">0%</strong></div>
           </div>
         </div>
 
-        <!-- Įgūdžių lenta -->
+        <!-- Įgūdžių lenta (kortelės generuojamos custom.js) -->
         <div class="lenta">
-
-            <div class="stulpelis planuojama">
-              <h3><i class="bi bi-calendar-event"></i> Planuojama</h3>
-              <div class="kortele" data-busena="planuojama" data-xp="80">
-                <i class="bi bi-motherboard kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>FPGA programavimas</h4>
-                  <span class="busena">Būsena: Planuojama</span>
-                </div>
-                <span class="xp">XP: 80</span>
-              </div>
-              <div class="kortele" data-busena="planuojama" data-xp="60">
-                <i class="bi bi-broadcast kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>RF grandinės</h4>
-                  <span class="busena">Būsena: Planuojama</span>
-                </div>
-                <span class="xp">XP: 60</span>
-              </div>
-            </div>
-
-            <div class="stulpelis mokomasi">
-              <h3><i class="bi bi-book"></i> Mokomasi</h3>
-              <div class="kortele" data-busena="mokomasi" data-xp="50">
-                <i class="bi bi-cpu kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>STM32 programavimas</h4>
-                  <span class="busena">Būsena: Mokomasi</span>
-                </div>
-                <span class="xp">XP: 50</span>
-              </div>
-              <div class="kortele" data-busena="mokomasi" data-xp="40">
-                <i class="bi bi-soundwave kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>Signalų apdorojimas</h4>
-                  <span class="busena">Būsena: Mokomasi</span>
-                </div>
-                <span class="xp">XP: 40</span>
-              </div>
-            </div>
-
-            <div class="stulpelis atlikta">
-              <h3><i class="bi bi-check2-circle"></i> Atlikta</h3>
-              <div class="kortele" data-busena="atlikta" data-xp="60">
-                <i class="bi bi-diagram-3 kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>KiCad projektavimas</h4>
-                  <span class="busena">Būsena: Atlikta</span>
-                </div>
-                <span class="xp">XP: 60</span>
-              </div>
-              <div class="kortele" data-busena="atlikta" data-xp="50">
-                <i class="bi bi-activity kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>LTspice modeliavimas</h4>
-                  <span class="busena">Būsena: Atlikta</span>
-                </div>
-                <span class="xp">XP: 50</span>
-              </div>
-              <div class="kortele" data-busena="atlikta" data-xp="40">
-                <i class="bi bi-tools kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>Litavimas</h4>
-                  <span class="busena">Būsena: Atlikta</span>
-                </div>
-                <span class="xp">XP: 40</span>
-              </div>
-              <div class="kortele" data-busena="atlikta" data-xp="30">
-                <i class="bi bi-graph-up kortele-ikona"></i>
-                <div class="kortele-tekstas">
-                  <h4>MATLAB</h4>
-                  <span class="busena">Būsena: Atlikta</span>
-                </div>
-                <span class="xp">XP: 30</span>
-              </div>
-            </div>
-
+          <div class="stulpelis planuojama">
+            <h3><i class="bi bi-calendar-event"></i> Planuojama</h3>
+            <div class="korteles" id="korteles-planuojama"></div>
+          </div>
+          <div class="stulpelis mokomasi">
+            <h3><i class="bi bi-book"></i> Mokomasi</h3>
+            <div class="korteles" id="korteles-mokomasi"></div>
+          </div>
+          <div class="stulpelis atlikta">
+            <h3><i class="bi bi-check2-circle"></i> Atlikta</h3>
+            <div class="korteles" id="korteles-atlikta"></div>
+          </div>
         </div>
 
       </div>
