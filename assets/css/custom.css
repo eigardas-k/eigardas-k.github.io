@@ -1,0 +1,252 @@
+/* =====================================================
+   custom.css – 9 LD stiliai (įkeliamas po main.css)
+   ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap");
+
+/* ---------- 2. Šriftai (Typography) ---------- */
+
+/* 2a. Šriftų šeima */
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+/* 2b. Antraštės h1–h6 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", Arial, sans-serif;
+  color: #12304d;
+  letter-spacing: 0.5px;
+}
+
+h1 { font-size: 42px; font-weight: 800; }
+h2 { font-size: 34px; font-weight: 700; }
+h3 { font-size: 24px; font-weight: 700; color: #0b5c8a; }
+h4 { font-size: 19px; font-weight: 600; }
+h5 { font-size: 16px; font-weight: 600; color: #4a6075; }
+h6 { font-size: 14px; font-weight: 600; text-transform: uppercase; }
+
+.section-title h2 {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* 2c. Pastraipos */
+p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #33414e;
+}
+
+/* ---------- 3. Mygtukai ir nuorodos ---------- */
+
+/* 3a. Mygtukai ir jų pseudo-klasės */
+button,
+.contact .php-email-form button[type=submit] {
+  background: #0b5c8a;
+  color: #ffffff;
+  border: 2px solid #0b5c8a;
+  border-radius: 8px;
+  padding: 10px 32px;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover,
+.contact .php-email-form button[type=submit]:hover {
+  background: #ffffff;
+  color: #0b5c8a;
+}
+
+button:active,
+.contact .php-email-form button[type=submit]:active {
+  transform: scale(0.95);
+  background: #083f5f;
+  color: #ffffff;
+}
+
+/* 3b. Nuorodos (turinyje ir poraštėje) */
+main a,
+footer a {
+  color: #0b5c8a;
+  font-weight: 600;
+}
+
+main a:hover,
+footer a:hover {
+  color: #e07a1f;
+  text-decoration: underline;
+}
+
+/* ---------- 4. Išdėstymas: tarpai ir turinio blokai ---------- */
+
+/* 4a. Tarpai skiltyse „Apie“, „Patirtis“, „Atlikti darbai“ */
+#about,
+#resume,
+#portfolio {
+  padding: 90px 0;
+}
+
+#about .content {
+  padding: 30px;
+}
+
+.resume .resume-item {
+  margin-bottom: 30px;
+  padding: 20px 20px 20px 30px;
+}
+
+.portfolio .portfolio-item {
+  margin-bottom: 20px;
+}
+
+/* 4b. Turinio blokų kraštinės, užapvalinimai ir šešėliai */
+#about .content,
+.about img {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.skills .progress {
+  padding: 12px 16px;
+  border: 1px solid #dce6ef;
+  border-radius: 10px;
+}
+
+.resume .resume-item {
+  border-left: 3px solid #0b5c8a;
+  border-radius: 0 12px 12px 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.portfolio .portfolio-item img {
+  border: 1px solid #dce6ef;
+  border-radius: 12px;
+}
+
+.services .service-item {
+  border-top: 4px solid #0b5c8a;
+  border-radius: 12px;
+}
+
+.contact .info-item,
+.contact .php-email-form {
+  border: 1px solid #dce6ef;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* ---------- 5. Pasirinkti komponentai ---------- */
+
+/* 5.1 Navigacijos juosta */
+.navmenu a,
+.navmenu a:focus {
+  background: #ffffff;
+  border: 2px solid #0b5c8a;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navmenu a:hover,
+.navmenu .active,
+.navmenu .active:focus,
+.navmenu li:hover > a {
+  background: #0b5c8a;
+}
+
+/* 5.2 Mygtukas „į viršų“ */
+.scroll-top {
+  background: #e07a1f;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.scroll-top:hover {
+  background: #b85f12;
+}
+
+/* ---------- Papildoma 1. Sąrašai ---------- */
+
+/* Nenumeruotas sąrašas – pseudo-elementas ::before */
+#services ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#services ul > li::before {
+  content: "▸ ";
+  color: #0b5c8a;
+  font-weight: 700;
+}
+
+/* Numeruotas sąrašas – skaitikliai (counters) */
+#services ol {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: etapas;
+}
+
+#services ol > li {
+  counter-increment: etapas;
+  margin-bottom: 6px;
+}
+
+#services ol > li::before {
+  content: counter(etapas) ". ";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #0b5c8a;
+  color: #ffffff;
+  text-align: center;
+  line-height: 28px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Įdėtinis sąrašas */
+#services ul ul {
+  margin: 4px 0 4px 24px;
+  padding-left: 10px;
+  border-left: 2px dashed #e07a1f;
+  font-style: italic;
+}
+
+#services ul ul > li::before {
+  content: "– ";
+  color: #e07a1f;
+}
+
+/* ---------- Papildoma 2. Lentelė ---------- */
+
+#services table {
+  border-collapse: collapse;
+}
+
+/* Antraštinė eilutė */
+#services table thead th {
+  background: #12304d;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Zebra stilius ir :hover efektas */
+#services table tbody tr:nth-child(even) td {
+  background: #eef4fa;
+}
+
+#services table tbody tr:hover td {
+  background: #d7e8f5;
+}
+
+/* Vienodi vidiniai tarpai ir lygiavimas centre */
+#services table th,
+#services table td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
