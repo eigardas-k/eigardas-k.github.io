@@ -500,3 +500,86 @@ footer a:hover {
   0%, 100% { transform: scale(1); }
   50%      { transform: scale(1.5); }
 }
+
+
+/* =====================================================
+   11 LD – kontaktų forma
+   ===================================================== */
+
+/* Forma neištempiama per visą stulpelio aukštį */
+.contact .php-email-form {
+  height: auto;
+}
+
+/* Laukų pavadinimai */
+#kontaktu-forma label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Telefono ir skaičių laukai – kaip kiti šablono laukai */
+.contact .php-email-form input[type=tel],
+.contact .php-email-form input[type=number] {
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Klaidingas laukas – raudonas rėmelis */
+.contact .php-email-form .form-control.klaida {
+  border-color: #dc3545;
+}
+
+/* Klaidos tekstas po lauku */
+.klaidos-tekstas {
+  color: #dc3545;
+  font-size: 13px;
+  min-height: 18px;
+  margin-top: 4px;
+}
+
+/* Neaktyvus „Siųsti“ mygtukas */
+.contact .php-email-form button[type=submit]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  background: #0b5c8a;
+  color: #ffffff;
+}
+
+/* Mygtukas „Išvalyti“ */
+#isvalyti {
+  margin-left: 10px;
+  background: #ffffff;
+  color: #0b5c8a;
+}
+
+#isvalyti:hover {
+  background: #0b5c8a;
+  color: #ffffff;
+}
+
+/* Formos rezultatai */
+#formos-rezultatai {
+  margin-top: 20px;
+}
+
+#formos-rezultatai:not(:empty) {
+  padding: 16px 20px;
+  border: 1px solid #dce6ef;
+  border-radius: 12px;
+  background: #f7f9fb;
+}
+
+#formos-rezultatai p {
+  margin: 0 0 4px;
+}
+
+#formos-rezultatai .vidurkis {
+  margin-top: 10px;
+  font-weight: 700;
+  color: #0b5c8a;
+}
